@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prashans Stays – Our Listings</title>
-
-  <!-- ✅ Styles -->
+  <title>Prashans Stays – Listings</title>
   <link rel="stylesheet" href="/assets/css/style.css" />
 
-  <!-- ✅ Secure CSP allowing API + inline script -->
+  <!-- ✅ Content Security Policy (allow Worker + images + inline script) -->
   <meta
     http-equiv="Content-Security-Policy"
     content="
@@ -20,6 +18,7 @@
     "
   />
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-content">
@@ -34,8 +33,8 @@
 
   <main class="container">
     <section class="intro">
-      <h2>Find Your Perfect Stay</h2>
-      <p>Discover cozy homes, boutique apartments, and luxury villas — all curated for unforgettable stays.</p>
+      <h2>Discover Beautiful Places to Stay</h2>
+      <p>Handpicked stays — from cozy cottages to luxury villas. Find your next getaway below.</p>
     </section>
 
     <section id="listing-grid" class="listing-grid">
@@ -44,7 +43,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Prashans Stays · Crafted with ❤️ for explorers</p>
+    <p>© 2025 Prashans Stays · Built with ❤️ and Cloudflare Edge</p>
   </footer>
 
   <script>
@@ -61,17 +60,22 @@
           const card = document.createElement('div');
           card.className = 'listing-card';
           card.innerHTML = `
-            <img src="${l.image}" alt="${l.name}">
+            <div class="image-wrapper">
+              <img src="${l.image}" alt="${l.name}">
+              <span class="price-tag">${l.price || '$99/night'}</span>
+            </div>
             <div class="listing-info">
               <h3>${l.name}</h3>
-              <p>${l.details}</p>
-              <button class="book-btn">View Details</button>
+              <p class="location">${l.location || 'Unknown location'}</p>
+              <p class="details">${l.details}</p>
+              <button class="book-btn">Book Now</button>
             </div>
           `;
           grid.appendChild(card);
         });
       } catch (err) {
-        document.getElementById('listing-grid').innerHTML = `<p class="error">Unable to load listings. Please try again later.</p>`;
+        document.getElementById('listing-grid').innerHTML =
+          `<p class="error">Unable to load listings. Please try again later.</p>`;
         console.error(err);
       }
     }
