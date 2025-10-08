@@ -1,0 +1,2 @@
+/listings
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev; img-src 'self' https://cdn.pixabay.com https://images.unsplash.com data:; style-src 'self' 'unsafe-inline';
