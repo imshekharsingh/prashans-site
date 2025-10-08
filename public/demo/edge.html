@@ -2,30 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edge Demo - StayEasy</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Prashans Stays - Demo</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Edge API Demo</h1>
-    <p>Fetch real-time property listings from the edge.</p>
-  </header>
-
-  <main>
-    <button id="fetchListings">Fetch Listings</button>
-    <pre id="response"></pre>
-  </main>
-
-  <footer>
-    <a href="/">Back to Home</a>
-  </footer>
-
+  <h1>Edge Demo</h1>
+  <button id="load">Load Listings from Worker API</button>
+  <ul id="demo-list"></ul>
   <script>
-    document.getElementById('fetchListings').addEventListener('click', async () => {
+    document.getElementById('load').addEventListener('click', async () => {
       const res = await fetch('/api/listings');
       const data = await res.json();
-      document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+      const container = document.getElementById('demo-list');
+      container.innerHTML = '';
+      data.forEach(l => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${l.name}</strong> - ${l.details}`;
+        container.appendChild(li);
+      });
     });
   </script>
 </body>

@@ -2,49 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StayEasy Rentals - Listings</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Prashans Stays - Listings</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
   <header>
-    <h1>Explore Our Listings</h1>
+    <h1>Our Listings</h1>
     <nav>
-      <a href="/">Home</a> |
-      <a href="/demo/edge.html">Live Demo</a> |
-      <a href="/contact.html">Contact</a>
+      <a href="/index.html">Home</a>
+      <a href="/listings.html">Listings</a>
+      <a href="/demo/edge.html">Demo</a>
     </nav>
   </header>
-
   <main>
-    <section id="listings">
-      <p>Click "Load Properties" to see dynamic listings powered by edge API.</p>
-      <button id="loadListings">Load Properties</button>
-      <div id="propertyContainer"></div>
-    </section>
+    <ul id="listing-container"></ul>
   </main>
-
-  <footer>
-    <p>&copy; 2025 StayEasy Rentals</p>
-  </footer>
-
   <script>
-    document.getElementById('loadListings').addEventListener('click', async () => {
+    async function loadListings() {
       const res = await fetch('/api/listings');
-      const data = await res.json();
-      const container = document.getElementById('propertyContainer');
-      container.innerHTML = '';
-      data.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'property-card';
-        card.innerHTML = `
-          <img src="${p.image}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          <p>${p.details}</p>
-        `;
-        container.appendChild(card);
+      const listings = await res.json();
+      const container = document.getElementById('listing-container');
+      listings.forEach(l => {
+        const li = document.createElement('li');
+        li.innerHTML = `<h3>${l.name}</h3><p>${l.details}</p><img src="${l.image}" width="200">`;
+        container.appendChild(li);
       });
-    });
+    }
+    loadListings();
   </script>
 </body>
 </html>
