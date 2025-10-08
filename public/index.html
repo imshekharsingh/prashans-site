@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Prashans Stays — Curated Boutique Getaways</title>
+  <title>Dream Stays — Demo Site For Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- CSP to allow worker fetch if needed -->
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com;">
+        content="default-src 'self'; connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
 </head>
 <body>
+  <!-- Navbar -->
   <header class="navbar">
     <img src="/assets/images/logo.png" alt="Prashans Stays" class="logo">
     <nav>
-      <a href="/index.html">Home</a>
+      <a href="/index.html" class="active">Home</a>
       <a href="/listings.html">Listings</a>
       <a href="/demo/edge.html">Demo</a>
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
       <h1>Discover Unforgettable Stays</h1>
@@ -25,8 +30,14 @@
     </div>
   </section>
 
+  <!-- Main content (unchanged from your previous index.html) -->
+  <main class="container">
+    <!-- Your existing index.html content goes here -->
+  </main>
+
+  <!-- Footer -->
   <footer>
-    <p>© 2025 Prashans Stays. Built for performance and edge learning.</p>
+    <p>© 2025 Dream Stays. Built for performance and edge learning.</p>
   </footer>
 </body>
 </html>
