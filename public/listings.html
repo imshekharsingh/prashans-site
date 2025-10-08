@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prashans Stays – Listings</title>
+  <title>Explore Beautiful Stays | Prashans</title>
+
+  <!-- ✅ Styles -->
   <link rel="stylesheet" href="/assets/css/style.css" />
 
-  <!-- ✅ Content Security Policy (allow Worker + images + inline script) -->
+  <!-- ✅ Content Security Policy -->
   <meta
     http-equiv="Content-Security-Policy"
     content="
@@ -33,8 +35,11 @@
 
   <main class="container">
     <section class="intro">
-      <h2>Discover Beautiful Places to Stay</h2>
-      <p>Handpicked stays — from cozy cottages to luxury villas. Find your next getaway below.</p>
+      <h2>Find Your Perfect Stay</h2>
+      <p>
+        Experience comfort and luxury across handpicked locations.
+        Discover hidden gems, modern apartments, and serene getaways.
+      </p>
     </section>
 
     <section id="listing-grid" class="listing-grid">
@@ -43,41 +48,72 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Prashans Stays · Built with ❤️ and Cloudflare Edge</p>
+    <p>© 2025 Prashans Stays · Explore. Relax. Repeat.</p>
   </footer>
 
   <script>
     async function loadListings() {
+      const fallbackListings = [
+        {
+          name: "Hillside Haven",
+          details: "Cozy cabin retreat surrounded by misty pine forests.",
+          image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+          price: "$120/night",
+          location: "Manali, India"
+        },
+        {
+          name: "Urban Studio Loft",
+          details: "Modern apartment in the heart of the city with skyline views.",
+          image: "https://images.unsplash.com/photo-1598300055121-7c88b6aee1d2?auto=format&fit=crop&w=800&q=80",
+          price: "$95/night",
+          location: "Bangalore, India"
+        },
+        {
+          name: "Seaside Escape",
+          details: "Elegant villa steps away from the turquoise waves.",
+          image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+          price: "$185/night",
+          location: "Goa, India"
+        },
+        {
+          name: "Desert Oasis",
+          details: "Peaceful desert stay with private plunge pool and sunset deck.",
+          image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+          price: "$210/night",
+          location: "Jaisalmer, India"
+        }
+      ];
+
       try {
-        const response = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
-        if (!response.ok) throw new Error('Failed to fetch listings');
-        const listings = await response.json();
-
-        const grid = document.getElementById('listing-grid');
-        grid.innerHTML = '';
-
-        listings.forEach(l => {
-          const card = document.createElement('div');
-          card.className = 'listing-card';
-          card.innerHTML = `
-            <div class="image-wrapper">
-              <img src="${l.image}" alt="${l.name}">
-              <span class="price-tag">${l.price || '$99/night'}</span>
-            </div>
-            <div class="listing-info">
-              <h3>${l.name}</h3>
-              <p class="location">${l.location || 'Unknown location'}</p>
-              <p class="details">${l.details}</p>
-              <button class="book-btn">Book Now</button>
-            </div>
-          `;
-          grid.appendChild(card);
-        });
-      } catch (err) {
-        document.getElementById('listing-grid').innerHTML =
-          `<p class="error">Unable to load listings. Please try again later.</p>`;
-        console.error(err);
+        const res = await fetch("https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings");
+        const listings = res.ok ? await res.json() : fallbackListings;
+        renderListings(listings.length ? listings : fallbackListings);
+      } catch {
+        renderListings(fallbackListings);
       }
+    }
+
+    function renderListings(listings) {
+      const grid = document.getElementById("listing-grid");
+      grid.innerHTML = "";
+
+      listings.forEach((l) => {
+        const card = document.createElement("div");
+        card.className = "listing-card";
+        card.innerHTML = `
+          <div class="image-wrapper">
+            <img src="${l.image}" alt="${l.name}" loading="lazy">
+            <div class="price-badge">${l.price}</div>
+          </div>
+          <div class="listing-info">
+            <h3>${l.name}</h3>
+            <p class="location"><i class="icon-location"></i> ${l.location}</p>
+            <p class="details">${l.details}</p>
+            <button class="book-btn">Book Now</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
     }
 
     loadListings();
