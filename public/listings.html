@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prashans Stays | Beautiful Getaways</title>
-  <link rel="preconnect" href="https://images.unsplash.com" />
+  <title>Prashans Stays | Explore Stays</title>
   <link rel="stylesheet" href="/assets/css/style.css" />
 
+  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy"
     content="
       default-src 'self';
@@ -14,7 +14,8 @@
       connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;
       img-src 'self' https://images.unsplash.com data:;
       style-src 'self' 'unsafe-inline';
-    " />
+    "
+  />
 </head>
 
 <body>
@@ -31,19 +32,19 @@
 
   <section class="hero-banner">
     <div class="overlay">
-      <h2>Find Your Perfect Stay</h2>
+      <h2>Discover Unique Stays</h2>
       <p>Handpicked retreats designed for comfort, style, and unforgettable memories.</p>
     </div>
   </section>
 
   <main class="container listings-container">
     <div id="listing-grid" class="listing-grid">
-      <div class="loading">Fetching listings...</div>
+      <div class="loading">Loading listings...</div>
     </div>
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Prashans Stays — Curated Experiences, Modern Comforts.</p>
+    <p>© 2025 Prashans Stays · Curated Experiences, Modern Comforts.</p>
   </footer>
 
   <script>
@@ -87,7 +88,7 @@
       ];
 
       try {
-        const res = await fetch("https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings");
+        const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
         const listings = res.ok ? await res.json() : fallbackListings;
         renderListings(listings.length ? listings : fallbackListings);
       } catch {
@@ -98,7 +99,8 @@
     function renderListings(listings) {
       const grid = document.getElementById("listing-grid");
       grid.innerHTML = "";
-      listings.forEach((l) => {
+
+      listings.forEach(l => {
         const card = document.createElement("div");
         card.className = "listing-card";
         card.innerHTML = `

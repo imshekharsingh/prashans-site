@@ -1,11 +1,17 @@
+/* --- GENERAL --- */
 body {
   font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
   margin: 0;
   background: #f8f9fb;
   color: #333;
 }
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1.5rem;
+}
 
-/* Header */
+/* --- HEADER --- */
 header.site-header {
   background: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
@@ -15,11 +21,9 @@ header.site-header {
   z-index: 1000;
 }
 .header-content {
-  max-width: 1200px;
-  margin: auto;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 0 1.5rem;
 }
 .brand {
@@ -37,7 +41,7 @@ nav a.active, nav a:hover {
   color: #0070f3;
 }
 
-/* Hero Banner */
+/* --- HERO BANNER --- */
 .hero-banner {
   position: relative;
   background: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
@@ -58,7 +62,7 @@ nav a.active, nav a:hover {
   margin-bottom: 0.5rem;
 }
 
-/* Listings Grid */
+/* --- GRID --- */
 .listings-container {
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -68,6 +72,8 @@ nav a.active, nav a:hover {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
 }
+
+/* --- LISTING CARD --- */
 .listing-card {
   background: #fff;
   border-radius: 16px;
@@ -124,7 +130,7 @@ nav a.active, nav a:hover {
   background: #005ad3;
 }
 
-/* Footer */
+/* --- FOOTER --- */
 footer.site-footer {
   background: #fff;
   text-align: center;
