@@ -3,22 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Explore Beautiful Stays | Prashans</title>
-
-  <!-- ✅ Styles -->
+  <title>Prashans Stays | Beautiful Getaways</title>
+  <link rel="preconnect" href="https://images.unsplash.com" />
   <link rel="stylesheet" href="/assets/css/style.css" />
 
-  <!-- ✅ Content Security Policy -->
-  <meta
-    http-equiv="Content-Security-Policy"
+  <meta http-equiv="Content-Security-Policy"
     content="
       default-src 'self';
       script-src 'self' 'unsafe-inline';
       connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;
       img-src 'self' https://images.unsplash.com data:;
       style-src 'self' 'unsafe-inline';
-    "
-  />
+    " />
 </head>
 
 <body>
@@ -33,22 +29,21 @@
     </div>
   </header>
 
-  <main class="container">
-    <section class="intro">
+  <section class="hero-banner">
+    <div class="overlay">
       <h2>Find Your Perfect Stay</h2>
-      <p>
-        Experience comfort and luxury across handpicked locations.
-        Discover hidden gems, modern apartments, and serene getaways.
-      </p>
-    </section>
+      <p>Handpicked retreats designed for comfort, style, and unforgettable memories.</p>
+    </div>
+  </section>
 
-    <section id="listing-grid" class="listing-grid">
-      <div class="loading">Loading listings...</div>
-    </section>
+  <main class="container listings-container">
+    <div id="listing-grid" class="listing-grid">
+      <div class="loading">Fetching listings...</div>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Prashans Stays · Explore. Relax. Repeat.</p>
+    <p>© 2025 Prashans Stays — Curated Experiences, Modern Comforts.</p>
   </footer>
 
   <script>
@@ -56,31 +51,38 @@
       const fallbackListings = [
         {
           name: "Hillside Haven",
-          details: "Cozy cabin retreat surrounded by misty pine forests.",
-          image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+          details: "Cozy cabin surrounded by pine forests and misty mountain air.",
+          image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
           price: "$120/night",
           location: "Manali, India"
         },
         {
-          name: "Urban Studio Loft",
-          details: "Modern apartment in the heart of the city with skyline views.",
-          image: "https://images.unsplash.com/photo-1598300055121-7c88b6aee1d2?auto=format&fit=crop&w=800&q=80",
+          name: "Urban Loft Apartment",
+          details: "Modern city studio with skyline views and stylish interiors.",
+          image: "https://images.unsplash.com/photo-1598300055121-7c88b6aee1d2?auto=format&fit=crop&w=900&q=80",
           price: "$95/night",
           location: "Bangalore, India"
         },
         {
           name: "Seaside Escape",
-          details: "Elegant villa steps away from the turquoise waves.",
-          image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+          details: "Relax in this elegant beachfront villa with infinity pool.",
+          image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
           price: "$185/night",
           location: "Goa, India"
         },
         {
-          name: "Desert Oasis",
-          details: "Peaceful desert stay with private plunge pool and sunset deck.",
-          image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+          name: "Desert Mirage Villa",
+          details: "Golden-sand views with luxury amenities and sunset lounge.",
+          image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=80",
           price: "$210/night",
           location: "Jaisalmer, India"
+        },
+        {
+          name: "Forest Edge Cottage",
+          details: "Private stay near tranquil waterfalls and nature trails.",
+          image: "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=900&q=80",
+          price: "$110/night",
+          location: "Coorg, India"
         }
       ];
 
@@ -96,19 +98,18 @@
     function renderListings(listings) {
       const grid = document.getElementById("listing-grid");
       grid.innerHTML = "";
-
       listings.forEach((l) => {
         const card = document.createElement("div");
         card.className = "listing-card";
         card.innerHTML = `
-          <div class="image-wrapper">
+          <div class="listing-image">
             <img src="${l.image}" alt="${l.name}" loading="lazy">
             <div class="price-badge">${l.price}</div>
           </div>
-          <div class="listing-info">
+          <div class="listing-content">
             <h3>${l.name}</h3>
-            <p class="location"><i class="icon-location"></i> ${l.location}</p>
-            <p class="details">${l.details}</p>
+            <p class="location">${l.location}</p>
+            <p>${l.details}</p>
             <button class="book-btn">Book Now</button>
           </div>
         `;

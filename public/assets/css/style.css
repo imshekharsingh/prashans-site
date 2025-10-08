@@ -1,154 +1,135 @@
-/* --- GENERAL --- */
 body {
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
   margin: 0;
+  background: #f8f9fb;
   color: #333;
-  background-color: #f9fafb;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
+/* Header */
 header.site-header {
-  background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 1rem 0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
-
 .header-content {
+  max-width: 1200px;
+  margin: auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
 }
-
 .brand {
   font-size: 1.8rem;
-  color: #2b2b2b;
   font-weight: 700;
+  color: #222;
 }
-
 nav a {
-  margin-left: 1rem;
   text-decoration: none;
-  color: #555;
+  margin-left: 1rem;
   font-weight: 500;
+  color: #555;
 }
-
 nav a.active, nav a:hover {
   color: #0070f3;
 }
 
-/* --- INTRO --- */
-.intro {
+/* Hero Banner */
+.hero-banner {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+  height: 45vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-banner .overlay {
+  background: rgba(0,0,0,0.55);
   text-align: center;
-  margin-top: 2rem;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
 }
-
-.intro h2 {
-  font-size: 2.2rem;
+.hero-banner h2 {
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  color: #222;
 }
 
-/* --- GRID --- */
+/* Listings Grid */
+.listings-container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
 .listing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
-  margin-top: 2.5rem;
 }
-
 .listing-card {
-  background: white;
+  background: #fff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+  transition: all 0.25s ease;
 }
-
 .listing-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
 }
-
-/* --- IMAGE --- */
-.image-wrapper {
+.listing-image {
   position: relative;
-  overflow: hidden;
 }
-
-.image-wrapper img {
+.listing-image img {
   width: 100%;
   height: 230px;
   object-fit: cover;
-  transition: transform 0.5s ease;
 }
-
-.image-wrapper:hover img {
-  transform: scale(1.05);
-}
-
 .price-badge {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0,0,0,0.7);
   color: #fff;
   padding: 0.3rem 0.7rem;
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
-
-/* --- INFO --- */
-.listing-info {
-  padding: 1rem 1.3rem;
+.listing-content {
+  padding: 1.2rem;
 }
-
-.listing-info h3 {
+.listing-content h3 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: #111;
 }
-
 .location {
-  color: #666;
+  color: #777;
+  margin: 0.3rem 0 0.8rem;
   font-size: 0.95rem;
-  margin: 0.3rem 0 0.6rem;
 }
-
-.details {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 1rem;
-  line-height: 1.4;
-}
-
 .book-btn {
   background: #0070f3;
   color: white;
   border: none;
-  padding: 0.7rem 1.4rem;
-  border-radius: 6px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.25s ease;
+  transition: background 0.3s;
 }
-
 .book-btn:hover {
   background: #005ad3;
 }
 
-/* --- FOOTER --- */
-.site-footer {
-  text-align: center;
-  padding: 2rem 0;
-  color: #777;
+/* Footer */
+footer.site-footer {
   background: #fff;
-  margin-top: 4rem;
+  text-align: center;
+  padding: 2rem;
+  color: #777;
   border-top: 1px solid #eee;
+  margin-top: 3rem;
 }
