@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dream Stays — Demo Site For Learning</title>
+  <title>Prashans Stays — Curated Boutique Getaways</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/style.css">
 
-  <!-- CSP to allow worker fetch if needed -->
+  <!-- CSP for workers & images -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
 </head>
@@ -23,6 +23,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <img src="/assets/images/hero.jpg" alt="Luxury Stays" class="hero-bg">
     <div class="hero-content">
       <h1>Discover Unforgettable Stays</h1>
       <p>Handpicked retreats, villas, and city apartments crafted for comfort and charm.</p>
@@ -30,14 +31,52 @@
     </div>
   </section>
 
-  <!-- Main content (unchanged from your previous index.html) -->
-  <main class="container">
-    <!-- Your existing index.html content goes here -->
-  </main>
+  <!-- Featured Stays -->
+  <section class="featured-stays container">
+    <h2>Featured Stays</h2>
+    <div class="listing-grid">
+      <div class="listing-card">
+        <div class="listing-image">
+          <img src="/assets/images/villa.jpg" alt="Luxury Beach Villa">
+          <div class="price-badge">$299/night</div>
+        </div>
+        <div class="listing-content">
+          <h3>Luxury Beach Villa</h3>
+          <p class="location">Malibu, CA</p>
+          <p>3 Beds • 2 Baths • Ocean View</p>
+          <button class="book-btn">Book Now</button>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-image">
+          <img src="/assets/images/cabin.jpg" alt="Cozy Mountain Cabin">
+          <div class="price-badge">$199/night</div>
+        </div>
+        <div class="listing-content">
+          <h3>Cozy Mountain Cabin</h3>
+          <p class="location">Aspen, CO</p>
+          <p>2 Beds • 1 Bath • Forest Retreat</p>
+          <button class="book-btn">Book Now</button>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-image">
+          <img src="/assets/images/apartment.jpg" alt="City Apartment Downtown">
+          <div class="price-badge">$149/night</div>
+        </div>
+        <div class="listing-content">
+          <h3>City Apartment Downtown</h3>
+          <p class="location">New York, NY</p>
+          <p>1 Bed • 1 Bath • Central Location</p>
+          <button class="book-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer>
-    <p>© 2025 Dream Stays. Built for performance and edge learning.</p>
+  <footer class="site-footer">
+    <p>© 2025 Prashans Stays · Curated Experiences, Modern Comforts.</p>
   </footer>
 </body>
 </html>
