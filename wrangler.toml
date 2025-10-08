@@ -1,8 +1,8 @@
 name = "prashans-edge"
 main = "edge/index.js"
+compatibility_date = "2025-10-04"
 
-[[bindings]]
-type = "service"
-name = "ASSETS"
-service = "prashans-pages"
-environment = "production"
+[env.production]
+bindings = [
+  { type = "plain_text", name = "PAGES_URL", text = "https://prashans-site.pages.dev" }
+]
