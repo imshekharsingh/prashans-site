@@ -10,8 +10,10 @@
   <button id="load">Load Listings from Worker API</button>
   <ul id="demo-list"></ul>
   <script>
+    const workerAPI = 'https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings';
+
     document.getElementById('load').addEventListener('click', async () => {
-      const res = await fetch('/api/listings');
+      const res = await fetch(workerAPI);
       const data = await res.json();
       const container = document.getElementById('demo-list');
       container.innerHTML = '';
