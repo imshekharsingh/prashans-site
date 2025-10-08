@@ -1,185 +1,233 @@
-/* General reset & container */
-body, html {
+/* Reset some basics */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f7f7f7;
-  color: #333;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* Body */
+body {
+  background-color: #fdfcfb;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container */
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* Header */
-.site-header {
-  background-color: #004080;
-  color: #fff;
   padding: 1rem 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.site-header .brand {
-  font-size: 1.8rem;
-  margin: 0;
+/* Header / Navbar */
+.navbar, .site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.site-header nav {
-  margin-top: 0.5rem;
+.navbar img.logo {
+  height: 50px;
 }
 
+.navbar nav a,
 .site-header nav a {
-  color: #fff;
   text-decoration: none;
-  margin-right: 1.5rem;
+  color: #333;
+  margin-left: 1.5rem;
   font-weight: 500;
+  transition: color 0.3s;
 }
 
+.navbar nav a:hover,
+.site-header nav a:hover,
+.navbar nav a.active,
 .site-header nav a.active {
-  text-decoration: underline;
+  color: #ff6f61;
 }
 
-/* Hero Banner */
-.hero-banner {
+/* Hero Section */
+.hero, .hero-banner {
   position: relative;
-  background-color: #004080;
-  background-image: url('/assets/images/hero.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  height: 200px;
+  background: url('/assets/images/hero.jpg') center/cover no-repeat;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
   text-align: center;
 }
 
-.hero-banner .overlay {
-  background: rgba(0,0,0,0.4);
+.hero-banner .overlay, .hero .hero-content {
+  background-color: rgba(0, 0, 0, 0.4);
   padding: 2rem;
   border-radius: 10px;
 }
 
-.hero-banner h2 {
-  font-size: 2rem;
+.hero h1, .hero-banner h2 {
+  font-size: 2.8rem;
   margin-bottom: 0.5rem;
 }
 
-.hero-banner p {
-  font-size: 1rem;
+.hero p, .hero-banner p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: #ff6f61;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #e65b50;
 }
 
 /* Listings Grid */
-.listing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+.listings-container {
+  padding: 2rem 0;
 }
 
-/* Listing Card */
+.listing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+
 .listing-card {
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .listing-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-/* Listing Image */
 .listing-image {
   position: relative;
-  width: 100%;
-  height: 220px; /* Set a fixed height for all cards */
-  overflow: hidden;
-  border-bottom: 1px solid #eee; /* optional separation */
 }
 
 .listing-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Makes image fill the container without distortion */
-  object-position: center; /* Center the image */
-  transition: transform 0.3s ease;
+  height: 200px;
+  object-fit: cover;
 }
 
-.listing-card:hover .listing-image img {
-  transform: scale(1.05); /* subtle zoom on hover */
-}
-
-/* Price Badge */
 .price-badge {
   position: absolute;
   top: 10px;
-  right: 10px;
-  background-color: #ff6600;
+  left: 10px;
+  background-color: #ff6f61;
   color: #fff;
   padding: 0.3rem 0.6rem;
-  font-weight: bold;
   border-radius: 5px;
+  font-weight: bold;
   font-size: 0.9rem;
 }
 
-/* Listing Content */
 .listing-content {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .listing-content h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;
-  color: #004080;
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
 }
 
 .listing-content .location {
   font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 0.5rem;
+  color: #777;
+  margin-bottom: 0.6rem;
 }
 
 .listing-content p {
+  flex-grow: 1;
   font-size: 0.95rem;
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 0.6rem;
 }
 
-/* Book Button */
 .book-btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #004080;
+  background-color: #ff6f61;
   color: #fff;
   border: none;
+  padding: 0.6rem;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  transition: background-color 0.3s;
 }
 
 .book-btn:hover {
-  background-color: #003366;
+  background-color: #e65b50;
 }
 
 /* Footer */
-.site-footer {
-  background-color: #004080;
-  color: #fff;
+footer, .site-footer {
+  background-color: #fff;
   text-align: center;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   margin-top: 2rem;
+  border-top: 1px solid #ddd;
+  color: #555;
+  font-size: 0.9rem;
 }
 
-/* Loading message */
+/* Loading */
 .loading {
+  font-size: 1rem;
   text-align: center;
-  font-size: 1.2rem;
-  color: #004080;
   padding: 2rem;
+  color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero h1, .hero-banner h2 {
+    font-size: 2rem;
+  }
+
+  .listing-image img {
+    height: 180px;
+  }
+
+  .navbar nav a, .site-header nav a {
+    margin-left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1, .hero-banner h2 {
+    font-size: 1.6rem;
+  }
+
+  .listing-image img {
+    height: 150px;
+  }
+
+  .listing-content h3 {
+    font-size: 1.1rem;
+  }
 }
