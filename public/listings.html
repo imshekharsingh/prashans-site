@@ -1,101 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prashans Stays | Listings</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prashans Stays | Listings</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- Content Security Policy -->
-    <!-- <meta http-equiv="Content-Security-Policy"
+  <!-- CSP allowing local images -->
+  <meta http-equiv="Content-Security-Policy"
       content="
-        default-src 'self' 'unsafe-inline' 'unsafe-eval';
+        default-src 'self';
         script-src 'self' 'unsafe-inline';
         connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;
-        img-src 'self' https://cdn.pixabay.com https://images.unsplash.com data:;
+        img-src 'self' data:;
         style-src 'self' 'unsafe-inline';
-      "> -->
-    <meta http-equiv="Content-Security-Policy-Report-Only"
-        content="default-src 'self'; img-src 'self' https://cdn.pixabay.com https://images.unsplash.com data:;">
+      ">
 </head>
-
 <body>
-    <header class="site-header">
-        <div class="container header-content">
-            <h1 class="brand">Prashans Stays</h1>
-            <nav>
-                <a href="/index.html">Home</a>
-                <a href="/listings.html" class="active">Listings</a>
-                <a href="/demo/edge.html">Demo</a>
-            </nav>
-        </div>
-    </header>
+  <header class="site-header">
+    <div class="container header-content">
+      <h1 class="brand">Prashans Stays</h1>
+      <nav>
+        <a href="/index.html">Home</a>
+        <a href="/listings.html" class="active">Listings</a>
+        <a href="/demo/edge.html">Demo</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="hero-banner">
-        <div class="overlay">
-            <h2>Explore Our Stays</h2>
-            <p>Handpicked retreats for comfort, style, and unforgettable experiences.</p>
-        </div>
-    </section>
+  <section class="hero-banner">
+    <div class="overlay">
+      <h2>Explore Our Stays</h2>
+      <p>Handpicked retreats for comfort, style, and unforgettable experiences.</p>
+    </div>
+  </section>
 
-    <main class="container listings-container">
-        <div id="listing-grid" class="listing-grid">
-            <div class="loading">Loading listings...</div>
-        </div>
-    </main>
+  <main class="container listings-container">
+    <div id="listing-grid" class="listing-grid">
+      <div class="loading">Loading listings...</div>
+    </div>
+  </main>
 
-    <footer class="site-footer">
-        <p>© 2025 Prashans Stays · Curated Experiences, Modern Comforts.</p>
-    </footer>
+  <footer class="site-footer">
+    <p>© 2025 Prashans Stays · Curated Experiences, Modern Comforts.</p>
+  </footer>
 
-    <script>
-        async function loadListings() {
-            try {
-                const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
-                const listings = res.ok ? await res.json() : [];
-                renderListings(listings);
-            } catch {
-                renderListings([]);
-            }
-        }
+  <script>
+    async function loadListings() {
+      try {
+        const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
+        const listings = res.ok ? await res.json() : [];
+        renderListings(listings);
+      } catch {
+        renderListings([]);
+      }
+    }
 
-        function renderListings(listings) {
-            const grid = document.getElementById("listing-grid");
-            grid.innerHTML = "";
+    function renderListings(listings) {
+      const grid = document.getElementById("listing-grid");
+      grid.innerHTML = "";
 
-            if (!listings.length) {
-                grid.innerHTML = "<p>No listings found.</p>";
-                return;
-            }
+      if (!listings.length) {
+        grid.innerHTML = "<p>No listings found.</p>";
+        return;
+      }
 
-            listings.forEach((l, i) => {
-                const card = document.createElement("div");
-                card.className = "listing-card";
-                const fallbackImages = [
-                    'https://cdn.pixabay.com/photo/2016/11/19/14/00/bedroom-1836159_1280.jpg',
-                    'https://cdn.pixabay.com/photo/2016/11/18/17/42/hotel-1835921_1280.jpg',
-                    'https://cdn.pixabay.com/photo/2017/08/06/06/29/interior-2590941_1280.jpg'
-                ];
-                const imgSrc = l.image || fallbackImages[i % fallbackImages.length];
-                card.innerHTML = `
-      <div class="listing-image">
-        <img src="${imgSrc}" alt="${l.name}" loading="lazy">
-        <div class="price-badge">${l.price || "$99/night"}</div>
-      </div>
-      <div class="listing-content">
-        <h3>${l.name}</h3>
-        <p class="location">${l.location || "Unknown location"}</p>
-        <p>${l.details}</p>
-        <button class="book-btn">Book Now</button>
-      </div>
-    `;
-                grid.appendChild(card);
-            });
-        }
+      listings.forEach(l => {
+        const card = document.createElement("div");
+        card.className = "listing-card";
+        const imgSrc = `/assets/images/${l.image}`;
+        card.innerHTML = `
+          <div class="listing-image">
+            <img src="${imgSrc}" alt="${l.name}" loading="lazy">
+            <div class="price-badge">${l.price}</div>
+          </div>
+          <div class="listing-content">
+            <h3>${l.name}</h3>
+            <p class="location">${l.location}</p>
+            <p>${l.details}</p>
+            <button class="book-btn">Book Now</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
 
-        loadListings();
-    </script>
+    loadListings();
+  </script>
 </body>
-
 </html>
