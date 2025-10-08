@@ -70,7 +70,7 @@
         card.className = "listing-card";
         card.innerHTML = `
           <div class="listing-image">
-            <img src="${l.image}" alt="${l.name}" loading="lazy">
+            <img src="${l.image || 'https://images.unsplash.com/photo-1505691723518-36a3eafed2d6?auto=format&fit=crop&w=800&q=80'}" alt="${l.name}" loading="lazy">
             <div class="price-badge">${l.price || "$99/night"}</div>
           </div>
           <div class="listing-content">
