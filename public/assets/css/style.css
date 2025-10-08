@@ -97,19 +97,21 @@ body, html {
 .listing-image {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 220px; /* Set a fixed height for all cards */
   overflow: hidden;
+  border-bottom: 1px solid #eee; /* optional separation */
 }
 
 .listing-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Makes image fill the container without distortion */
+  object-position: center; /* Center the image */
   transition: transform 0.3s ease;
 }
 
 .listing-card:hover .listing-image img {
-  transform: scale(1.05);
+  transform: scale(1.05); /* subtle zoom on hover */
 }
 
 /* Price Badge */
