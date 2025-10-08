@@ -12,16 +12,20 @@ export default {
       return new Response(JSON.stringify(listings), { headers: { 'Content-Type': 'application/json' } });
     }
 
-    // Proxy all other requests to Pages
+    // Proxy everything else to Pages
     try {
-      // Construct the full URL to Pages
-      const pagesUrl = new URL(url.pathname + url.search, env.PAGES_URL);
+      // Ensure path always starts with /
+      let path = url.pathname;
+      if (!path.startsWith("/")) path = "/" + path;
 
-      // Forward request method, headers, body
+      // Construct Pages URL safely
+      const pagesUrl = new URL(path + url.search, env.PAGES_URL);
+
+      // Forward method, headers, body
       const response = await fetch(pagesUrl.toString(), {
         method: request.method,
         headers: request.headers,
-        body: request.method !== 'GET' && request.method !== 'HEAD' ? request.body : null,
+        body: ['GET','HEAD'].includes(request.method) ? null : request.body,
       });
 
       return response;
