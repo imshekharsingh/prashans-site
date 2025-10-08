@@ -1,43 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Prashans Stays - Listings</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev; script-src 'self' 'unsafe-inline';">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prashans Stays – Our Listings</title>
+
+  <!-- ✅ Styles -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <!-- ✅ Secure CSP allowing API + inline script -->
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline';
+      connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;
+      img-src 'self' https://images.unsplash.com data:;
+      style-src 'self' 'unsafe-inline';
+    "
+  />
 </head>
-
 <body>
-    <header>
-        <h1>Our Listings</h1>
-        <nav>
-            <a href="/index.html">Home</a>
-            <a href="/listings.html">Listings</a>
-            <a href="/demo/edge.html">Demo</a>
-        </nav>
-    </header>
-    <main>
-        <ul id="listing-container"></ul>
-    </main>
-    <script>
-        async function loadListings() {
-            try {
-                const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
-                const listings = await res.json();
-                const container = document.getElementById('listing-container');
-                listings.forEach(l => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<h3>${l.name}</h3><p>${l.details}</p><img src="${l.image}" width="200">`;
-                    container.appendChild(li);
-                });
-            } catch (err) {
-                console.error('Failed to load listings:', err);
-            }
-        }
-        loadListings();
-    </script>
-</body>
+  <header class="site-header">
+    <div class="container header-content">
+      <h1 class="brand">Prashans Stays</h1>
+      <nav>
+        <a href="/index.html">Home</a>
+        <a href="/listings.html" class="active">Listings</a>
+        <a href="/demo/edge.html">Demo</a>
+      </nav>
+    </div>
+  </header>
 
+  <main class="container">
+    <section class="intro">
+      <h2>Find Your Perfect Stay</h2>
+      <p>Discover cozy homes, boutique apartments, and luxury villas — all curated for unforgettable stays.</p>
+    </section>
+
+    <section id="listing-grid" class="listing-grid">
+      <div class="loading">Loading listings...</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Prashans Stays · Crafted with ❤️ for explorers</p>
+  </footer>
+
+  <script>
+    async function loadListings() {
+      try {
+        const response = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
+        if (!response.ok) throw new Error('Failed to fetch listings');
+        const listings = await response.json();
+
+        const grid = document.getElementById('listing-grid');
+        grid.innerHTML = '';
+
+        listings.forEach(l => {
+          const card = document.createElement('div');
+          card.className = 'listing-card';
+          card.innerHTML = `
+            <img src="${l.image}" alt="${l.name}">
+            <div class="listing-info">
+              <h3>${l.name}</h3>
+              <p>${l.details}</p>
+              <button class="book-btn">View Details</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        document.getElementById('listing-grid').innerHTML = `<p class="error">Unable to load listings. Please try again later.</p>`;
+        console.error(err);
+      }
+    }
+
+    loadListings();
+  </script>
+</body>
 </html>
