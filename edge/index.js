@@ -2,7 +2,6 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
 
-    // Only serve API endpoint
     if (url.pathname === '/api/listings') {
       const listings = [
         { name: 'Luxury Beach Villa', details: '3 Beds • 2 Baths • Ocean View', image: '/assets/images/villa.jpg' },
@@ -11,11 +10,26 @@ export default {
       ];
 
       return new Response(JSON.stringify(listings), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*', // Allow all origins (or set to 'https://prashans.super-cdn.com')
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        },
       });
     }
 
-    // All other paths return 404
+    // Respond to OPTIONS requests for CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        }
+      });
+    }
+
     return new Response('Endpoint not found', { status: 404 });
   }
 };

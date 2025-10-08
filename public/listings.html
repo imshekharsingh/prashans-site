@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Prashans Stays - Listings</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+    <meta charset="UTF-8">
+    <title>Prashans Stays - Listings</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;">
 </head>
+
 <body>
-  <header>
-    <h1>Our Listings</h1>
-    <nav>
-      <a href="/index.html">Home</a>
-      <a href="/listings.html">Listings</a>
-      <a href="/demo/edge.html">Demo</a>
-    </nav>
-  </header>
-  <main>
-    <ul id="listing-container"></ul>
-  </main>
-  <script>
-    async function loadListings() {
-      const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
-      const listings = await res.json();
-      const container = document.getElementById('listing-container');
-      listings.forEach(l => {
-        const li = document.createElement('li');
-        li.innerHTML = `<h3>${l.name}</h3><p>${l.details}</p><img src="${l.image}" width="200">`;
-        container.appendChild(li);
-      });
-    }
-    loadListings();
-  </script>
+    <header>
+        <h1>Our Listings</h1>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/listings.html">Listings</a>
+            <a href="/demo/edge.html">Demo</a>
+        </nav>
+    </header>
+    <main>
+        <ul id="listing-container"></ul>
+    </main>
+    <script>
+        async function loadListings() {
+            try {
+                const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
+                const listings = await res.json();
+                const container = document.getElementById('listing-container');
+                listings.forEach(l => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<h3>${l.name}</h3><p>${l.details}</p><img src="${l.image}" width="200">`;
+                    container.appendChild(li);
+                });
+            } catch (err) {
+                console.error('Failed to load listings:', err);
+            }
+        }
+        loadListings();
+    </script>
 </body>
+
 </html>
