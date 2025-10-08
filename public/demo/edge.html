@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edge Demo - StayEasy</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Edge API Demo</h1>
+    <p>Fetch real-time property listings from the edge.</p>
+  </header>
+
+  <main>
+    <button id="fetchListings">Fetch Listings</button>
+    <pre id="response"></pre>
+  </main>
+
+  <footer>
+    <a href="/">Back to Home</a>
+  </footer>
+
+  <script>
+    document.getElementById('fetchListings').addEventListener('click', async () => {
+      const res = await fetch('/api/listings');
+      const data = await res.json();
+      document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>

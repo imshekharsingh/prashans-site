@@ -1,0 +1,8 @@
+name = "prashans-edge"
+main = "edge/index.js"
+
+[[bindings]]
+type = "service"
+name = "ASSETS"
+service = "prashans-pages"
+environment = "production"
