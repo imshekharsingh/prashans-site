@@ -2,7 +2,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Dynamic API endpoint for listings
+    // Dynamic API endpoint
     if (url.pathname === '/api/listings') {
       const listings = [
         { name: 'Luxury Beach Villa', details: '3 Beds • 2 Baths • Ocean View', image: '/assets/images/villa.jpg' },
@@ -14,7 +14,7 @@ export default {
 
     // Proxy all other requests to Cloudflare Pages site
     const pagesUrl = new URL(request.url);
-    pagesUrl.hostname = env.PAGES_URL.replace(/^https?:\/\//, '');
+    pagesUrl.href = `${env.PAGES_URL}${pagesUrl.pathname}${pagesUrl.search}`;
     const response = await fetch(pagesUrl.toString(), request);
     return response;
   },
