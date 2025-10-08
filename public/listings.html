@@ -12,7 +12,7 @@
           default-src 'self';
           script-src 'self' 'unsafe-inline';
           connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;
-          img-src 'self' https://images.unsplash.com data:;
+          img-src 'self' https://cdn.pixabay.com data:;
           style-src 'self' 'unsafe-inline';
         ">
 </head>
@@ -46,6 +46,13 @@
   </footer>
 
   <script>
+    const fallbackImages = [
+      'https://cdn.pixabay.com/photo/2016/11/19/14/00/bedroom-1836159_1280.jpg',
+      'https://cdn.pixabay.com/photo/2016/11/18/17/42/hotel-1835921_1280.jpg',
+      'https://cdn.pixabay.com/photo/2017/08/06/06/29/interior-2590941_1280.jpg',
+      'https://cdn.pixabay.com/photo/2017/08/06/06/22/living-room-2590927_1280.jpg'
+    ];
+
     async function loadListings() {
       try {
         const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
@@ -65,12 +72,13 @@
         return;
       }
 
-      listings.forEach(l => {
+      listings.forEach((l, i) => {
         const card = document.createElement("div");
         card.className = "listing-card";
+        const imgSrc = l.image || fallbackImages[i % fallbackImages.length];
         card.innerHTML = `
           <div class="listing-image">
-            <img src="${l.image || 'https://images.unsplash.com/photo-1505691723518-36a3eafed2d6?auto=format&fit=crop&w=800&q=80'}" alt="${l.name}" loading="lazy">
+            <img src="${imgSrc}" alt="${l.name}" loading="lazy">
             <div class="price-badge">${l.price || "$99/night"}</div>
           </div>
           <div class="listing-content">
