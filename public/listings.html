@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prashans Stays | Explore Stays</title>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prashans Stays | Listings</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 
   <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy"
-    content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline';
-      connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;
-      img-src 'self' https://images.unsplash.com data:;
-      style-src 'self' 'unsafe-inline';
-    "
-  />
+        content="
+          default-src 'self';
+          script-src 'self' 'unsafe-inline';
+          connect-src 'self' https://prashans-edge-production.shekhar-singh20.workers.dev;
+          img-src 'self' https://images.unsplash.com data:;
+          style-src 'self' 'unsafe-inline';
+        ">
 </head>
-
 <body>
   <header class="site-header">
     <div class="container header-content">
@@ -32,8 +30,8 @@
 
   <section class="hero-banner">
     <div class="overlay">
-      <h2>Discover Unique Stays</h2>
-      <p>Handpicked retreats designed for comfort, style, and unforgettable memories.</p>
+      <h2>Explore Our Stays</h2>
+      <p>Handpicked retreats for comfort, style, and unforgettable experiences.</p>
     </div>
   </section>
 
@@ -49,56 +47,23 @@
 
   <script>
     async function loadListings() {
-      const fallbackListings = [
-        {
-          name: "Hillside Haven",
-          details: "Cozy cabin surrounded by pine forests and misty mountain air.",
-          image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
-          price: "$120/night",
-          location: "Manali, India"
-        },
-        {
-          name: "Urban Loft Apartment",
-          details: "Modern city studio with skyline views and stylish interiors.",
-          image: "https://images.unsplash.com/photo-1598300055121-7c88b6aee1d2?auto=format&fit=crop&w=900&q=80",
-          price: "$95/night",
-          location: "Bangalore, India"
-        },
-        {
-          name: "Seaside Escape",
-          details: "Relax in this elegant beachfront villa with infinity pool.",
-          image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
-          price: "$185/night",
-          location: "Goa, India"
-        },
-        {
-          name: "Desert Mirage Villa",
-          details: "Golden-sand views with luxury amenities and sunset lounge.",
-          image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=80",
-          price: "$210/night",
-          location: "Jaisalmer, India"
-        },
-        {
-          name: "Forest Edge Cottage",
-          details: "Private stay near tranquil waterfalls and nature trails.",
-          image: "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=900&q=80",
-          price: "$110/night",
-          location: "Coorg, India"
-        }
-      ];
-
       try {
         const res = await fetch('https://prashans-edge-production.shekhar-singh20.workers.dev/api/listings');
-        const listings = res.ok ? await res.json() : fallbackListings;
-        renderListings(listings.length ? listings : fallbackListings);
+        const listings = res.ok ? await res.json() : [];
+        renderListings(listings);
       } catch {
-        renderListings(fallbackListings);
+        renderListings([]);
       }
     }
 
     function renderListings(listings) {
       const grid = document.getElementById("listing-grid");
-      grid.innerHTML = "";
+      grid.innerHTML = ""; // Clear old content
+
+      if (!listings.length) {
+        grid.innerHTML = "<p>No listings found.</p>";
+        return;
+      }
 
       listings.forEach(l => {
         const card = document.createElement("div");
@@ -106,11 +71,11 @@
         card.innerHTML = `
           <div class="listing-image">
             <img src="${l.image}" alt="${l.name}" loading="lazy">
-            <div class="price-badge">${l.price}</div>
+            <div class="price-badge">${l.price || "$99/night"}</div>
           </div>
           <div class="listing-content">
             <h3>${l.name}</h3>
-            <p class="location">${l.location}</p>
+            <p class="location">${l.location || "Unknown location"}</p>
             <p>${l.details}</p>
             <button class="book-btn">Book Now</button>
           </div>
